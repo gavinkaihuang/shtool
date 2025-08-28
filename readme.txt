@@ -1,3 +1,8 @@
+#20250828
+修改move_and_filter.sh
+修改目标目录和源目录的位置，让目标目录作为第一个参数，源目录作为第二个参数。
+要求用户确认目录后进行按键确认执行，减少出错概率。
+
 #202508
 添加clean_and_move.sh, 整理指定目录的下一层目录，将非mp4和mkv的文件、文件夹都删除。视频文件也只保留100M以上的。
 exe: ./clean_and_move.sh source_path target_path
