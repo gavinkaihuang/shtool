@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#遍历子目录
+
 # 检查是否提供了两个参数
 if [ $# -ne 2 ]; then
     echo "Usage: $0 <source_directory> <target_directory>"
