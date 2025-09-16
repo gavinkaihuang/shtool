@@ -1,0 +1,25 @@
+# 忽略 Python 缓存文件
+__pycache__/
+
+# 忽略 Python 依赖包目录
+*.egg-info/
+dist/
+build/
+
+# 忽略日志文件和临时文件
+*.log
+*.tmp
+temp/
+
+# 忽略 IDE 配置文件（例如 VS Code）
+.vscode/
+
+# 忽略 Telegram 机器人配置文件
+# 防止将敏感信息（如 Bot Token 和 Chat ID）上传到 Git
+config.ini
+
+# 忽略运行时生成的截屏图片
+# 你不希望每次有人被拍到时都上传一张图片
+*.jpg
+*.jpeg
+*.png
