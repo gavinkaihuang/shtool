@@ -1,9 +1,3 @@
-###
-
-###列出指定目录下的重复文件和文件夹
-
-###
-
 #!/usr/bin/env python3
 import os
 import hashlib
@@ -13,9 +7,13 @@ import argparse
 def file_hash(file_path):
     """计算文件的MD5哈希值"""
     hash_md5 = hashlib.md5()
-    with open(file_path, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
+    try:
+        with open(file_path, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_md5.update(chunk)
+    except (IOError, OSError):
+        print(f"Warning: Cannot read {file_path}")
+        return None
     return hash_md5.hexdigest()
 
 def dir_fingerprint(dir_path):
@@ -23,23 +21,29 @@ def dir_fingerprint(dir_path):
     fingerprint = hashlib.md5()
     files = []
     
-    for root, dirs, filenames in os.walk(dir_path):
-        # 排序目录和文件以确保一致性
-        dirs.sort()
-        filenames.sort()
-        
-        # 添加当前路径的相对路径
-        rel_root = os.path.relpath(root, dir_path)
-        if rel_root != '.':
-            fingerprint.update(rel_root.encode('utf-8'))
-            fingerprint.update(b'/')
-        
-        # 添加文件名
-        for filename in filenames:
-            file_path = os.path.join(root, filename)
-            rel_file = os.path.relpath(file_path, dir_path)
-            files.append(rel_file)
-            files.append(file_hash(file_path))
+    try:
+        for root, dirs, filenames in os.walk(dir_path):
+            # 排序目录和文件以确保一致性
+            dirs.sort()
+            filenames.sort()
+            
+            # 添加当前路径的相对路径
+            rel_root = os.path.relpath(root, dir_path)
+            if rel_root != '.':
+                fingerprint.update(rel_root.encode('utf-8'))
+                fingerprint.update(b'/')
+            
+            # 添加文件名和内容哈希
+            for filename in filenames:
+                file_path = os.path.join(root, filename)
+                rel_file = os.path.relpath(file_path, dir_path)
+                files.append(rel_file)
+                h = file_hash(file_path)
+                if h:
+                    files.append(h)
+    except (IOError, OSError):
+        print(f"Warning: Cannot access {dir_path}")
+        return None
     
     # 排序文件列表并更新哈希
     files.sort()
@@ -48,7 +52,7 @@ def dir_fingerprint(dir_path):
     
     return fingerprint.hexdigest()
 
-def scan_duplicates(root_dir, min_duplicates=2):
+def scan_duplicates(root_dir, min_dups=2):
     """扫描目录中的重复文件和重复目录"""
     file_dups = defaultdict(list)  # hash -> list of paths
     dir_dups = defaultdict(list)   # fingerprint -> list of dir paths
@@ -57,24 +61,20 @@ def scan_duplicates(root_dir, min_duplicates=2):
     for root, dirs, files in os.walk(root_dir):
         for file in files:
             file_path = os.path.join(root, file)
-            try:
-                h = file_hash(file_path)
+            h = file_hash(file_path)
+            if h:
                 file_dups[h].append(file_path)
-            except (IOError, OSError):
-                print(f"Warning: Cannot read {file_path}")
     
     # 扫描目录（只检查有子内容的目录）
     for root, dirs, files in os.walk(root_dir):
         if dirs or files:  # 只检查非空目录
-            try:
-                fp = dir_fingerprint(root)
+            fp = dir_fingerprint(root)
+            if fp:
                 dir_dups[fp].append(root)
-            except (IOError, OSError):
-                print(f"Warning: Cannot access {root}")
     
-    # 过滤重复项（至少min_duplicates个）
-    file_groups = {k: v for k, v in file_dups.items() if len(v) >= min_duplicates}
-    dir_groups = {k: v for k, v in dir_dups.items() if len(v) >= min_duplicates}
+    # 过滤重复项（至少min_dups个）
+    file_groups = {k: v for k, v in file_dups.items() if len(v) >= min_dups}
+    dir_groups = {k: v for k, v in dir_dups.items() if len(v) >= min_dups}
     
     return file_groups, dir_groups
 
@@ -92,11 +92,11 @@ def main():
     
     root_dir = os.path.abspath(args.directory)
     if not os.path.exists(root_dir):
-        print(f"Error: Directory {root_dir} does not exist.")
+        print(f"Error: 目录 {root_dir} 不存在。")
         return
     
     print(f"扫描目录: {root_dir}")
-    file_groups, dir_groups = scan_duplicates(root_dir, args.min_duplicates)
+    file_groups, dir_groups = scan_duplicates(root_dir, args.min_dups)  # 修正：使用 args.min_dups
     
     print("\n=== 重复文件 ===")
     for hash_key, paths in file_groups.items():
