@@ -1,19 +1,19 @@
 ###
-基本用法：python3 empty_dir_cleaner.py /path/to/your/directory
-脚本会先列出所有空目录，然后询问确认（输入 y 确认删除）。
+###基本用法：python3 empty_dir_cleaner.py /path/to/your/directory
+###脚本会先列出所有空目录，然后询问确认（输入 y 确认删除）。
 
-跳过确认（危险！）：python3 empty_dir_cleaner.py /path/to/directory --no-confirm
-示例输出（部分）：text在目录 /home/user/docs 下找到 2 个空目录：
-  - /home/user/docs/empty_folder1
-  - /home/user/docs/sub/empty_sub
+###跳过确认（危险！）：python3 empty_dir_cleaner.py /path/to/directory --no-confirm
+###示例输出（部分）：text在目录 /home/user/docs 下找到 2 个空目录：
+ ### - /home/user/docs/empty_folder1
+ ### - /home/user/docs/sub/empty_sub
 
-确认删除所有以上空目录？(y/N): y
+###确认删除所有以上空目录？(y/N): y
 
-开始删除...
-已删除空目录: /home/user/docs/sub/empty_sub
-已删除空目录: /home/user/docs/empty_folder1
+###开始删除...
+###已删除空目录: /home/user/docs/sub/empty_sub
+###已删除空目录: /home/user/docs/empty_folder1
 
-删除完成: 2 个空目录成功删除。
+###除完成: 2 个空目录成功删除。
 
 
 ###

@@ -1,22 +1,22 @@
 ###
 
-基本用法：python3 file_deleter.py /path/to/your/directory
-脚本会先列出所有匹配文件，然后询问确认（输入 y 确认删除）。
+###基本用法 python3 file_deleter.py /path/to/your/directory
+###脚本会先列出所有匹配文件，然后询问确认（输入 y 确认删除）。
 
-跳过确认（危险！）：python3 file_deleter.py /path/to/directory --no-confirm
-示例输出（部分）：text在目录 /home/user/docs 下找到 3 个匹配文件：
-  - /home/user/docs/note.txt
-  - /home/user/docs/page.html
-  - /home/user/docs/app.apk
+###跳过确认（危险！）python3 file_deleter.py /path/to/directory --no-confirm
+###示例输出（部分）：text在目录 /home/user/docs 下找到 3 个匹配文件：
+###  - /home/user/docs/note.txt
+###  - /home/user/docs/page.html
+### - /home/user/docs/app.apk
 
-确认删除所有以上文件？(y/N): y
+###确认删除所有以上文件？(y/N): y
 
-开始删除...
-已删除: /home/user/docs/note.txt
-已删除: /home/user/docs/page.html
-已删除: /home/user/docs/app.apk
+###开始删除...
+###已删除: /home/user/docs/note.txt
+###已删除: /home/user/docs/page.html
+###已删除: /home/user/docs/app.apk
 
-删除完成: 3 个文件成功删除。
+###删除完成: 3 个文件成功删除。
 
 ###
 
