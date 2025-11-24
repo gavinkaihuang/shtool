@@ -1,0 +1,8 @@
+1. 运行扫描器
+python3 scan_dupes.py
+
+2. 运行清理器 (模拟模式)
+python3 clean_dupes.py
+
+3. 运行清理器 (正式执行)
+python3 clean_dupes.py --execute
