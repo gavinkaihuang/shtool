@@ -96,7 +96,7 @@ class DuplicateScanner:
 
 if __name__ == "__main__":
     # 定义需要扫描的目录
-    TARGET_DIRS = ['/mnt/u10t/movies', '/mnt/u12t/movies']
+    TARGET_DIRS = ['/mnt/u10tdisk/movies', '/mnt/u12tdisk/movies']
     OUTPUT_JSON = 'duplicate_videos.json'
 
     scanner = DuplicateScanner(TARGET_DIRS)
