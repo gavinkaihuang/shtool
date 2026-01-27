@@ -60,7 +60,7 @@ def main():
         print(f"Error: 目录 {root_dir} 不存在。")
         return
     
-    extensions = ('.txt', '.url', '.html', '.htm', '.mhtml', '.apk')
+    extensions = ('.txt', '.url', '.html', '.htm', '.mhtml', '.apk', '.exe')
     files = find_files(root_dir, extensions)
     
     if not files:
