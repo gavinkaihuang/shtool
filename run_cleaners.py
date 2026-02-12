@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-/***
+"""
 基本用法 (需要手动确认)
 运行脚本并指定目标目录。脚本会依次执行三个清理任务，每个任务在删除前都会询问你。
 bash
@@ -16,7 +16,7 @@ python3 run_cleaners.py /Users/yourname/Downloads/target_folder --no-confirm
 删除特定文件: 扫描并删除 .txt, .url, .html, .apk 等文件。
 删除空目录: 最后扫描并清理剩下的空文件夹。
 
-***/
+"""
 
 import os
 import argparse

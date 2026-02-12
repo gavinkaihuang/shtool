@@ -1,4 +1,14 @@
 
+
+#202502
+ 运行run_cleaners.py 去删除相关的文件
+ 代替三个脚本
+         "delete_small_videos.py",
+        "find_and_delete_files.py",
+        "delete_empty_folder.py"
+
+
+
 #20251217 
 添加delete_small_videos.py
 用于删除指定目录下小于指定大小的视频文件
