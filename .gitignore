@@ -24,4 +24,11 @@ config.ini
 *.jpeg
 *.png
 
-anki/config.py
+anki/config.py*.txt
+
+# 或者更精确地只忽略爬虫内容目录
+crawbook/content/
+*.txt
+*.zip
+*.json
+.DS_Store
