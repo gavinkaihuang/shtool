@@ -24,6 +24,7 @@ config.ini
 *.jpeg
 *.png
 
+<<<<<<< Updated upstream
 anki/config.py*.txt
 
 # 或者更精确地只忽略爬虫内容目录
@@ -32,3 +33,8 @@ crawbook/content/
 *.zip
 *.json
 .DS_Store
+=======
+anki/config.py
+
+config.json
+>>>>>>> Stashed changes

@@ -1,0 +1,13 @@
+使用方法
+在终端或命令行中执行脚本即可，你可以通过 -h 查看帮助信息：
+
+Bash
+python pdf_extractor.py -h
+基本调用：
+
+Bash
+python pdf_extractor.py -i ./math_test_papers.pdf -o ./output_images
+指定分辨率调用（例如降低分辨率以节省 Token）：
+
+Bash
+python pdf_extractor.py -i ./math_test_papers.pdf -o ./output_images -d 200
