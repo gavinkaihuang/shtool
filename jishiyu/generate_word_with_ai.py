@@ -3,10 +3,15 @@ from openai import OpenAI
 import time
 import json
 import os
+import sys
 
 # ================= 配置区域 =================
-# 1. 填入你的 DeepSeek API Key
-API_KEY = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" 
+# 1. 从环境变量读取 DeepSeek API Key
+API_KEY = os.getenv("DEEPSEEK_API_KEY")
+if not API_KEY:
+    print("❌ 错误：未设置环境变量 DEEPSEEK_API_KEY。")
+    print("   例如: export DEEPSEEK_API_KEY='sk-...'")
+    sys.exit(1)
 
 # 2. 文件设置
 INPUT_FILE = '及时雨高考英语词汇手册.csv'
@@ -14,12 +19,12 @@ OUTPUT_FILE = '及时雨单词书_DeepSeek补全版.csv'
 
 # 3. 批量大小
 # DeepSeek 处理长文本能力很强，一次处理 20 个既快又稳
-BATCH_SIZE = 20  
+BATCH_SIZE = 20
 # ===========================================
 
 # 初始化客户端 (DeepSeek 兼容 OpenAI SDK)
 client = OpenAI(
-    api_key='sk-4ed1bc3715ed4b3d9c6dac47a65fee85',
+    api_key=API_KEY,
     base_url="https://api.deepseek.com"
 )
 
